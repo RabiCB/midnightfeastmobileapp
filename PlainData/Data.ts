@@ -1,31 +1,38 @@
 export const sushiDishes = [
     {
       name: "Nigiri Sushi",
+      slug:"nigiri",
       description: "Nigiri is a traditional type of sushi consisting of a small ball of vinegared rice topped with a slice of raw or cooked fish, such as salmon or tuna.",
       image: "https://images.pexels.com/photos/1231234/pexels-photo-1231234.jpeg"
     },
     {
       name: "Maki Rolls (Makizushi)",
+      slug:"makiroll",
       description: "Maki rolls are cylindrical pieces of sushi wrapped in seaweed (nori) and filled with rice, fish, and vegetables. They are typically sliced into bite-sized pieces.",
       image: "https://images.pexels.com/photos/567890/pexels-photo-567890.jpeg"
     },
     {
       name: "Sashimi",
+      slug:"sashimi",
       description: "Sashimi consists of thinly sliced raw fish or seafood, served without rice. It's appreciated for its pure taste and delicate texture.",
       image: "https://images.pexels.com/photos/234567/pexels-photo-234567.jpeg"
     },
     {
       name: "Temaki (Hand Roll)",
+      slug:"temaki",
       description: "Temaki is a cone-shaped hand-rolled sushi wrapped in nori and filled with rice, fish, and vegetables. It's designed to be eaten with hands.",
       image: "https://images.pexels.com/photos/345678/pexels-photo-345678.jpeg"
     },
     {
       name: "Uramaki (Inside-Out Roll)",
+      slug:"uramaki",
+     
       description: "Uramaki is an inside-out sushi roll where the rice is on the outside, surrounding a nori sheet that encases the fillings. The outer layer is often sprinkled with sesame seeds or fish roe.",
       image: "https://images.pexels.com/photos/456789/pexels-photo-456789.jpeg"
     },
     {
       name: "Chirashi (Scattered Sushi)",
+      slug:"chirashi",
       description: "Chirashi is a bowl of sushi rice topped with a variety of raw fish and vegetables, offering a colorful and diverse presentation.",
       image: "https://images.pexels.com/photos/567890/pexels-photo-567890.jpeg"
     }
