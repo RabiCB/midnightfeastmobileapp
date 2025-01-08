@@ -14,11 +14,13 @@ import Header from '@/components/Home/Header';
 export default function HomeScreen() {
   return (
     <SafeareaView>
+      
 <ScrollView contentContainerStyle={{
   padding:14
 }} showsVerticalScrollIndicator={false}>
      <Header/>
-      <Homepage/>
+      <Homepage />
+
       </ScrollView>
       
 
