@@ -1,6 +1,6 @@
-import { Tabs } from 'expo-router';
+import { Tabs, usePathname, useRouter } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
@@ -8,17 +8,20 @@ import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { Entypo, FontAwesome5, FontAwesome6 } from '@expo/vector-icons';
+import { ThemedText } from '@/components/ThemedText';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  const route=useRouter()
+
   return (
     <Tabs
-      screenOptions={{
+      screenOptions={({route})=>({
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         headerShown: false,
         
-       
+       tabBarIcon:({focused,color,size})=>menufocused(focused,route,color),
       
         // tabBarBackground: TabBarBackground,
        
@@ -46,44 +49,97 @@ export default function TabLayout() {
           },
         }),
      
-        tabBarLabelStyle:{
-          fontSize: 12,
-         
-         
-        },
+       
        
       
-      }}>
+      })}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Home',
-          
-          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
+          tabBarLabel:({focused,color})=>(
+            <Text style={{
+              fontSize: 12,
+              fontWeight: focused ?'bold':'normal',
+              color: focused? Colors.orange:color,
+            }}>
+             Home
+            </Text>
+          )
+         
         }}
       />
       <Tabs.Screen
         name="cart"
         options={{
-          title: 'Cart',
-          tabBarIcon: ({ color }) => <FontAwesome6 name="bag-shopping" size={24} color={color} />,
+          title:  'Cart',
+          tabBarLabel:({focused,color})=>(
+            <Text style={{
+              fontSize: 12,
+              fontWeight: focused ?'bold':'normal',
+              color: focused? Colors.orange:color,
+            }}>
+            Cart
+            </Text>
+          )
         }}
+
       />
       <Tabs.Screen
         name="location"
+        
         options={{
           title: 'Location',
-          tabBarIcon: ({ color }) =><FontAwesome5 name="map-marker-alt" size={24} color={color} />,
+          tabBarLabel:({focused,color})=>(
+            <Text style={{
+              fontSize: 12,
+              fontWeight: focused ?'bold':'normal',
+              color: focused? Colors.orange:color,
+            }}>
+             Location
+            </Text>
+          )
+          
         }}
+
+        
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: 'Profile',
-          
-          tabBarIcon: ({ color }) => <FontAwesome5 name="user-alt" size={24} color={color} />,
+          tabBarLabel:({focused,color})=>(
+            <Text style={{
+              fontSize: 12,
+              fontWeight: focused ?'bold':'normal',
+              color: focused? Colors.orange:color,
+            }}>
+             Profile
+            </Text>
+          )
         }}
       />
     </Tabs>
   );
+}
+
+
+function menufocused(focused:any,route:{
+  name:string,
+  
+},color:string) {
+
+
+let icon;
+if(route.name==="index"){
+  icon=<Entypo name="home" size={focused ?28:24} color={focused ? Colors.orange:color} />
+}else if(route?.name==="cart"){
+  icon=<FontAwesome6 name="bag-shopping"  size={focused ?28:24} color={focused ? Colors.orange:color} />
+}else if(route?.name==="location"){
+  icon=<FontAwesome5 name="map-marker-alt"  size={focused ?28:24} color={focused ? Colors.orange:color} />
+}else if(route.name==="profile"){
+  icon=<FontAwesome5 name="user-alt"  size={focused ?28:24} color={focused ? Colors.orange:color} />
+}
+return icon
+
 }
