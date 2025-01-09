@@ -1,4 +1,4 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Colors } from '@/constants/Colors'
 import { useColorScheme } from '@/hooks/useColorScheme.web'
@@ -9,7 +9,7 @@ import { sushiDishes } from '@/PlainData/Data'
 import { blurhash } from '@/lib/Options'
 import { Image } from 'expo-image'
 
-const Detailpage = () => {
+const Detailpage = ({data}:any) => {
 
   const colorScheme = useColorScheme()
   return (
@@ -17,13 +17,23 @@ const Detailpage = () => {
       backgroundColor: colorScheme === 'dark' ? 'black' : "rgb(242, 242, 242)"
 
     }]}>
-      <View>
-        <ThemedText>Sake Nigiri</ThemedText>
-        <View><ThemedText>$</ThemedText><ThemedText>100</ThemedText></View>
+      <View style={[styles.flexwrap,{
+        justifyContent:'space-between',
+ 
+      }]}>
+        <ThemedText type='subtitle'>{data?.name}</ThemedText>
+        <View style={{
+          flexDirection:'row',
+          alignItems:'center',
+          
+        }}><ThemedText style={{
+          marginTop:10,
+          color:Colors.orange
+        }}>$</ThemedText><ThemedText type='subtitle'>{data?.price}</ThemedText></View>
       </View>
       <View style={[styles.optionscontainer,styles.margininbetween
       ]} >
-        <View style={styles.flexwrap}><Foundation name="star" size={24} color={"#FDCC0D"} /> <ThemedText style={{
+        <View style={styles.flexwrap}><Foundation name="star" size={24} color={"#FDCC0D"} /><ThemedText style={{
           fontSize: 18,
           fontWeight: 'bold'
         }}>4.2</ThemedText></View>
@@ -48,31 +58,25 @@ const Detailpage = () => {
           </Pressable>
         </View>
       </View>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{
+        paddingBottom: 80,
+ 
+       
+      }}>
       <View style={styles.margininbetween}>
-        <ThemedText>Expo Router is a file-based routing framework for React Native and web apps. It manages navigation between screens and uses the same components across multiple platforms. To get started, we need to know about the following conventions</ThemedText>
+        <ThemedText>{data?.description}</ThemedText>
       </View>
+
+     
       <View style={styles.margininbetween}>
         <ThemedText type='subtitle'>Ingredients</ThemedText>
         <FlatList showsHorizontalScrollIndicator={false} horizontal data={sushiDishes} renderItem={({item})=><View style={{
           marginRight:12
         }}><Image style={styles.ingredients} source={item?.image}  placeholder={{blurhash}}/></View>}/>
       </View>
-<Pressable style={{
-    position: "absolute",
-    bottom: -30,
-    alignSelf: "center",  // This centers horizontally
-    padding: 12,
-    width:"100%",
-    alignItems:'center',
-    justifyContent:'center',
+      </ScrollView>
+     
 
-    backgroundColor: Colors.orange,
-    borderRadius: 8,
-  }}>
- <ThemedText style={{
-  color:"white"
- }}>ADD TO CART</ThemedText>
-</Pressable>
     </View>
   )
 }
@@ -84,12 +88,11 @@ const styles = StyleSheet.create({
     marginVertical:10
   },
   container: {
-    height: "100%",
-    width: "100%",
+  
     flex: 1,
     right: 0,
-    marginTop: 280,
-    minHeight: 300,
+    marginTop:150,
+   
     padding: 14,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,

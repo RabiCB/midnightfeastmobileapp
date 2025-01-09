@@ -3,13 +3,40 @@ import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/hooks/useColorScheme';
+import ReactQueryProvider from '@/lib/ReactQueryProvider';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
+const PublicRoute = () => {
+  console.log("Rendering PublicRoutes");
+  return (
+    <Stack screenOptions={{
+      headerShown: false
+    }}>
+      <Stack.Screen 
+        name="(auth)/index" 
+        options={{ headerShown: false }} 
+      />
+    </Stack>
+  );
+};
+
+const ProtectedRoutes=()=>{
+  console.log("Rendering ProtectedRoutes");
+  return (
+    <Stack screenOptions={{
+      headerShown:false
+    }}>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="+not-found" />
+      <Stack.Screen  name='product/[slug]/index' options={{ headerShown: false }} />
+    </Stack>
+  );
+}
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -27,16 +54,19 @@ export default function RootLayout() {
     return null;
   }
 
+
+  const user=true
+
+ 
+
   return (
     <ThemeProvider  value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{
-        headerShown:false
-      }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen  name='product/[slug]/index' options={{ headerShown: false }} />
-      </Stack>
+      <ReactQueryProvider>
+      {user ? <ProtectedRoutes/>:<PublicRoute/>}
       <StatusBar style="auto" />
+      </ReactQueryProvider>
     </ThemeProvider>
   );
 }
+
+

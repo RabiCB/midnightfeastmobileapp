@@ -24,7 +24,7 @@ export const sushiDishes = [
       image: "https://images.pexels.com/photos/345678/pexels-photo-345678.jpeg"
     },
     {
-      name: "Uramaki (Inside-Out Roll)",
+      name: "Uramaki (Inside-Out Roll)uuuu",
       slug:"uramaki",
      
       description: "Uramaki is an inside-out sushi roll where the rice is on the outside, surrounding a nori sheet that encases the fillings. The outer layer is often sprinkled with sesame seeds or fish roe.",
