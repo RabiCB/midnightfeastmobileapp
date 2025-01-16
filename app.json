@@ -22,18 +22,18 @@
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    
-      "expo": {
-        "plugins": [
-          [
-            "expo-font",
-            {
-              "fonts": ["./assets/fonts/MonaSans-Variable.ttf"]
-            }
-          ]
+    "expo": {
+      "plugins": [
+        [
+          "expo-font",
+          {
+            "fonts": [
+              "./assets/fonts/MonaSans-Variable.ttf"
+            ]
+          }
         ]
-      },
-    
+      ]
+    },
     "plugins": [
       "expo-router",
       [
@@ -44,8 +44,8 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ]
-     
+      ],
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true

@@ -1,17 +1,14 @@
-import { Image, StyleSheet, Platform, Text, ViewComponent, View, ScrollView } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+import { Image, StyleSheet, Platform, Text, ViewComponent, View, ScrollView, Button } from 'react-native';
 import SafeareaView from '@/components/Wrapper/SafeareaView';
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
-import { Styles } from '@/constants/ConstantsStyles';
-import { Colors } from '@/constants/Colors';
 import Homepage from '@/components/Home/Homepage';
 import Header from '@/components/Home/Header';
+import { signOut } from 'firebase/auth';
+import { auth } from '@/firebaseconfig';
 
 export default function HomeScreen() {
+
+  
   return (
     <SafeareaView>
       
@@ -20,7 +17,16 @@ export default function HomeScreen() {
 }} showsVerticalScrollIndicator={false}>
      <Header/>
       <Homepage />
-
+<Button title='logout' onPress={ ()=>{
+signOut(auth).then(() => {
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+})
+}
+  
+}
+/>
       </ScrollView>
       
 

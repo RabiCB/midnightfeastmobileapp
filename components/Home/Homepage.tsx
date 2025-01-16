@@ -1,4 +1,4 @@
-import { Button, FlatList, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Button, FlatList, Keyboard, Pressable, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { ThemedText } from '../ThemedText'
 import { fastFoods, sushiDishes } from '@/PlainData/Data'
@@ -10,6 +10,7 @@ import { Link, router } from 'expo-router';
 import { addDoc, collection, getDocs } from 'firebase/firestore';
 import { db } from '@/firebaseconfig';
 import { useQuery } from '@tanstack/react-query';
+import { Skeleton } from '../skeleton/Skeleton';
 
 
 type ItemProps = { name: string, image: string };
@@ -280,6 +281,7 @@ const Homepage = () => {
 
 
       </View>
+      <Skeleton/>
       <View style={styles.headerTitle}>
         <ThemedText type='subtitle' style={{
           color: '#454A58'
@@ -308,7 +310,7 @@ const Homepage = () => {
         } horizontal data={recommendedfood} renderItem={({ item }) =>
           <MainCard price={"10"} slug={item?.slug} name={item?.name} image={item?.image} />
 
-        } />
+        }    ListEmptyComponent={()=>(<ActivityIndicator/>)} />
 
 
       </View>
